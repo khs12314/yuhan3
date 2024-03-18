@@ -8,7 +8,7 @@
 
 * Version
 
-    + IDE:visual studio 2022
+    + IDE: Visual Studio 2022
 
     + Compiler:
 

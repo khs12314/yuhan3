@@ -245,3 +245,20 @@ Link: [google][googlelinke]
 
 <img src="IMG/pcimg.jpg" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="내pc"></img><br/>
 <img src="IMG/pcimg.jpg" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="내pc"></img>
+
+## 강조
+
+*202127067*
+_202127067_
+**김한솔**
+__김한솔__
+~~202127067 김한솔~~
+
+문장 중간에 사용할 경우에는 **띄어쓰기** 를 사용하는 것이 좋다.
+
+
+
+
+
+
+
