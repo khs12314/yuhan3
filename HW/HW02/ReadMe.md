@@ -77,23 +77,23 @@ DVCS는 로컬 저장소를 사용하므로 네트워크 연결이 중요합니�
 *, +, -를 사용합니다
 
 * 1
- * 2
-  * 3
+  * 2
+    * 3
 
 + 1
- + 2
-  + 3
+  + 2
+    + 3
 
 - 1
- - 2
-  - 3
+  - 2
+    - 3
 
 이런식으로 같은 문자를 반복해서 나누어도되고
 
 * 1
- + 2
-  - 3
-   - 3
+  + 2
+    - 3
+      - 3
 이런식으로 혼합해서 사용도 가능합니다.
 
 
@@ -192,3 +192,9 @@ Link: [google][googlelinke]
 
 ## 이미지
 
+![Alt text](/IMG/pcimg.jpg)
+![1234](/IMG/pcimg.jpg)
+사이즈 조절 기능은 없기 때문에 <img width="" height=""></img>를 이용한다.
+
+<img src="/IMG/pcimg.jpg" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="내pc"></img><br/>
+<img src="/IMG/pcimg.jpg" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="내pc"></img>
