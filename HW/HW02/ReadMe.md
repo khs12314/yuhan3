@@ -192,9 +192,9 @@ Link: [google][googlelinke]
 
 ## 이미지
 
-![Alt text](/path/to/pcimg.jpg)
-![1234](/path/to/pcimg.jpg)
+![Alt text](IMG/pcimg.jpg)
+![1234](IMG/pcimg.jpg)
 사이즈 조절 기능은 없기 때문에 <img width="" height=""></img>를 이용한다.
 
-<img src="/path/to/pcimg.jpg" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="내pc"></img><br/>
-<img src="/path/to/pcimg.jpg" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="내pc"></img>
+<img src="IMG/pcimg.jpg" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="내pc"></img><br/>
+<img src="IMG/pcimg.jpg" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="내pc"></img>
