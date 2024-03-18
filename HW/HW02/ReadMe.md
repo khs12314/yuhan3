@@ -107,6 +107,7 @@ git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
 =====================
 
 그리고 문서의 부제목용 문법 또한 존재합니다.
+
 예시: 마크다운 H2
 -----------------
 
@@ -156,9 +157,9 @@ git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
 
 *1
 
-  *2
+    *2
 
-    *3
+        *3
 
 * 1
   * 2
@@ -166,9 +167,9 @@ git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
 
 +1
 
-  +2
+    +2
 
-    +3
+        +3
 
 
 + 1
@@ -178,9 +179,9 @@ git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
 
 -1
 
-  -2
+    -2
   
-    -3
+        -3
 
 
 - 1
@@ -188,6 +189,11 @@ git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
     - 3
 
 이런식으로 같은 문자를 반복해서 나누어도되고
+*1
+    
+    +2
+        
+        -3
 
 * 1
   + 2
@@ -230,15 +236,15 @@ public class BootSpringBootApplication {
 </pre> 
 
 * 코드블럭코드("```")을 이용하는 방법
-```
-```
+
+\(```\)
 public class BootSpringBootApplication {
   public static void main(String[] args) {
     System.out.println("Hello, Honeymon");
   }
 }
-```
-```
+\(```\)
+
 
 ```
 public class BootSpringBootApplication {
@@ -250,15 +256,15 @@ public class BootSpringBootApplication {
 
 깃허브에선 코드블럭코드("```")시작점에 사용하는 언어를 선언하여 문법강조가 가능하다.
 
-```
-```java
+
+|(```\)java
 public class BootSpringBootApplication {
   public static void main(String[] args) {
     System.out.println("Hello, Honeymon");
   }
 }
-```
-```
+\(```\)
+
 
 
 ```java
@@ -330,7 +336,10 @@ Link: [google][googlelinke]
 * 이메일링크: <address@example.com>
 
 ## 이미지
-\![Alt text]\(
+\![Alt text]\(IMG/pcimg.jpg\)
+
+\![1234\]\(IMG/pcimg.jpg\)
+
 ![Alt text](IMG/pcimg.jpg)
 ![1234](IMG/pcimg.jpg)
 사이즈 조절 기능은 없기 때문에 \<img width="" height=""></img\>를 이용한다.
