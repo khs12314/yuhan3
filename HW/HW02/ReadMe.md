@@ -214,7 +214,10 @@ public class BootSpringBootApplication {
 ## 링크
 
 * 참조 링크
-[link keyword][id]
+\[link keyword\]\[id\]
+
+\[link keyword\]\[id\]
+
 
 [id]: URL "Optional Title here"
 
@@ -248,10 +251,24 @@ Link: [google][googlelinke]
 
 ## 강조
 
+\*202127067\*
+
 *202127067*
+
+\_202127067\_
+
 _202127067_
+
+\**김한솔\**
+
 **김한솔**
+
+\__김한솔\__
+
 __김한솔__
+
+\~~202127067 김한솔\~~
+
 ~~202127067 김한솔~~
 
 문장 중간에 사용할 경우에는 **띄어쓰기** 를 사용하는 것이 좋다.
