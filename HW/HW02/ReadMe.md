@@ -26,9 +26,56 @@ DVCS는 로컬 저장소를 사용하므로 네트워크 연결이 중요합니�
 
 를 통해 작업하기 때문에 중앙 서버에 대한 의존성이 낮습니다.
 
-# 3. GIT을 이용하여 remote repository를 생성하고 git용 bash로 새로 intialize한 local repository랑 연결하는 과정을 스크린샷
+# 3. GIT을 이용하여 remote repository를 생성하고 git용 bash로 새로 intialize한 local repository랑 연결하는 과정을 스크린샷과 함께 각 명령어의 자세한 셜명을 작성하시오.
 
-과 함께 각 명령어의 자세한 셜명을 작성하시오.
+<img src="IMG/hwimg1.jpg" width="300px" height="300px" title="px(픽셀) 크기 설정" alt="remote repository"></img><br/>
+먼저 깃 허브를 통해 원격 레파지토리를 생성해줍니다.
+
+<img src="IMG/hwimg2.jpg" width="300px" height="300px" title="px(픽셀) 크기 설정" alt="remote repository"></img><br/>
+그 다음 깃배쉬를 통해 c드라이브에 mkdir 명령어를 통해 yhhw라는 파일을 생헝 후 git init으로git 저장소로 초기화 해줍니다.
+
+<img src="IMG/hwimg3.jpg" width="300px" height="300px" title="px(픽셀) 크기 설정" alt="remote repository"></img><br/>
+git branch -M main이라는 명령어를 통해 main이라는 브랜치를 생성하고 이름을 main으로 변경해줍니다.
+
+<img src="IMG/hwimg4.jpg" width="300px" height="300px" title="px(픽셀) 크기 설정" alt="remote repository"></img><br/>
+
+vim 명령어를 통해 README.md라는 파일을 생성 혹은 수정을 해줍니다.
+
+<img src="IMG/hwimg5.jpg" width="300px" height="300px" title="px(픽셀) 크기 설정" alt="remote repository"></img><br/>
+수정 혹은 생성 및 수정을 한 후 esc키를 누룬 다음 :wq 명령어를 입력하면 자동으로 저장 및 나가기가되고 git status를 통해
+
+현재 파일의 상태를 확인해줍니다.
+
+<img src="IMG/hwimg6.jpg" width="300px" height="300px" title="px(픽셀) 크기 설정" alt="remote repository"></img><br/>
+git add 명령어를 통해 수정 혹은 추가된 파일들을 commit을 하기위해 스테이징 영역에 추가해 줍니다.
+
+git add.은 해당 폴더의 모든 파일들을 추가하는 것이고 하나하나씩 추가하기 위해선 각 파일들의 이름들을 넣어야합니다.
+
+<img src="IMG/hwimg7.jpg" width="300px" height="300px" title="px(픽셀) 크기 설정" alt="remote repository"></img><br/>
+git add .을 통해 스테이징 영역에 추가된것을 확인하기 위해 git status를 통해 한번 더 확인해봅니다. 위 사진처럼
+
+추가하고자 하는 파일의 색상이 초록색이 됐다면 잘 추가된것이고 commit을 할 준비가 된 것 입니다.
+
+<img src="IMG/hwimg8.jpg" width="300px" height="300px" title="px(픽셀) 크기 설정" alt="remote repository"></img><br/>
+git commit을 통해 2024 프로그래밍 패턴 과제라는 문장으로 커밋 해 줬습니다.
+
+git commit -m"text" 명령어를 통해서도 commit을 해도 됩니다.
+
+<img src="IMG/hwimg9.jpg" width="300px" height="300px" title="px(픽셀) 크기 설정" alt="remote repository"></img><br/>
+그 다음 바로 git push를 하면 해당 오류가 뜹니다. 이유는 yhhw라는 local repository와 git의 remote repository와 연결이 되어 있지 않기 때문입니다.
+
+다행히 오류 해결을 위한 명령어를 알려주었으니 바로 git remote add <이름><url> yhhw와 git의 원격 저장소를 연결해줍시다.
+
+여기서 이름은 자유롭게하되 url은 연결하고자 하는 본인의 깃허브의 remote repository의 주소를 넣어야합니다.
+
+<img src="IMG/hwimg10.jpg" width="300px" height="300px" title="px(픽셀) 크기 설정" alt="remote repository"></img><br/>
+문제를 해결 후 다시 git push를 해주면 또 다른 오류가 뜹니다.
+
+이 오류는 원격저장소에 기본 branch를 설정하지 않아서 나는 오류로 이번에도 친절하게 명령어를 알려주었습니다.
+
+<img src="IMG/hwimg11.jpg" width="300px" height="300px" title="px(픽셀) 크기 설정" alt="remote repository"></img><br/>
+git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
+
 
 
 
