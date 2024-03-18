@@ -164,7 +164,7 @@ end code block.
 
 코드 블럭은 다음과 같이 2가지 방식을 사용할 수 있습니다.
 
-* \<pre><code>{code}</code></pre\>방식
+* \<pre><\code>{code}</code\></pre\>방식
 
 <pre>
 <code>
@@ -177,7 +177,7 @@ public class BootSpringBootApplication {
 </code>
 </pre> 
 
-* \``\`을 이용하는 방법
+* ("```")을 이용하는 방법
 
 ```
 public class BootSpringBootApplication {
@@ -188,6 +188,15 @@ public class BootSpringBootApplication {
 ```
 
 깃허브에선 코드블럭코드("```")시작점에 사용하는 언어를 선언하여 문법강조가 가능하다.
+
+\``\`java
+public class BootSpringBootApplication {
+  public static void main(String[] args) {
+    System.out.println("Hello, Honeymon");
+  }
+}
+\``\`
+
 
 ```java
 public class BootSpringBootApplication {
@@ -249,9 +258,9 @@ Link: [google][googlelinke]
 
 일반적인 URL 혹은 이메일 주소인 경우 적절한 형식으로 링크를 형성한다.
 
-* 외부링크:\<https://github.com/khs12314\>
+* 외부링크: <\https://github.com/khs12314\>
 
-* 이메일링크: \<address@example.com\>
+* 이메일링크: <\address@example.com\>
 
 적용예
 
