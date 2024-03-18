@@ -164,7 +164,7 @@ end code block.
 
 코드 블럭은 다음과 같이 2가지 방식을 사용할 수 있습니다.
 
-* <pre><code>{code}</code></pre>방식
+* \<pre><code>{code}</code></pre\>방식
 
 <pre>
 <code>
@@ -177,7 +177,7 @@ public class BootSpringBootApplication {
 </code>
 </pre> 
 
-* ```을 이용하는 방법
+* \``\`을 이용하는 방법
 
 ```
 public class BootSpringBootApplication {
@@ -201,25 +201,37 @@ public class BootSpringBootApplication {
 
 아래 줄은 모두 수평선을 만든다. 마크다운 문서를 미리보기로 출력할 때 페이지 나누기 용도로 많이 사용한다.
 
+\**\*
+
 ***
+
+\* * \*
 
 * * *
 
+\****\*
+
 *****
 
+\- - \-
+
+
 - - -
+
+\-----------------\-
 
 -------------------
 
 ## 링크
 
 * 참조 링크
-\[link keyword\]\[id\]
 
-\[link keyword\]\[id\]
+[link keyword][id]
+
 
 
 [id]: URL "Optional Title here"
+
 
 //code
 
@@ -229,7 +241,7 @@ Link: [google][googlelinke]
 
 * 외부링크
 
-사용문법: [Title](link)
+사용문법: \[Title\]\(link\)
 
 적용예: [Google](https://www.google.co.kr/)
 
@@ -237,7 +249,14 @@ Link: [google][googlelinke]
 
 일반적인 URL 혹은 이메일 주소인 경우 적절한 형식으로 링크를 형성한다.
 
+* 외부링크:\<https://github.com/khs12314\>
+
+* 이메일링크: \<address@example.com\>
+
+적용예
+
 * 외부링크: <https://github.com/khs12314>
+
 * 이메일링크: <address@example.com>
 
 ## 이미지
