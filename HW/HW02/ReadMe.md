@@ -93,10 +93,13 @@ git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
 헤더의 중 큰제목(문서의 제목)록에 쓰이는 문법은 =자 입니다
 
 예시: 마크다운 헤더H1
+
 \====================\=
 
 그리고 문서의 부제목용 문법 또한 존재합니다.
+
 예시: 마크다운 H2
+
 \----------------\-
 
 
@@ -110,11 +113,17 @@ git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
 또한 #으로도 표현이 가능한데 #은 1~6까지만 지원합니다.
 
 #예시: H1
+
 ##예시: H2
+
 ###예시: H3
+
 ####예시: H4
+
 #####예시: H5
+
 ######예시: H6
+
 #######예시 : H7(지원하지 않음)
 
 # 예시: H1 
@@ -132,7 +141,9 @@ git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
 먼저 순서가 있는 목록은 숫자와 점을 사용합니다.
 
 1.1 번쨰
+
 2.2 번째
+
 3.3 번쨰
 
 1. 1 번째
@@ -144,23 +155,33 @@ git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
 *, +, -를 사용합니다
 
 *1
+
   *2
+
     *3
+
 * 1
   * 2
     * 3
 
 +1
+
   +2
+
     +3
+
 
 + 1
   + 2
     + 3
 
+
 -1
+
   -2
+  
     -3
+
 
 - 1
   - 2
@@ -208,16 +229,16 @@ public class BootSpringBootApplication {
 </code>
 </pre> 
 
-* '```'을 이용하는 방법
-
-'```'
+* 코드블럭코드("```")을 이용하는 방법
+```
+```
 public class BootSpringBootApplication {
   public static void main(String[] args) {
     System.out.println("Hello, Honeymon");
   }
 }
-'```'
-
+```
+```
 
 ```
 public class BootSpringBootApplication {
@@ -229,13 +250,15 @@ public class BootSpringBootApplication {
 
 깃허브에선 코드블럭코드("```")시작점에 사용하는 언어를 선언하여 문법강조가 가능하다.
 
-'```'java
+```
+```java
 public class BootSpringBootApplication {
   public static void main(String[] args) {
     System.out.println("Hello, Honeymon");
   }
 }
-'```'
+```
+```
 
 
 ```java
@@ -307,10 +330,15 @@ Link: [google][googlelinke]
 * 이메일링크: <address@example.com>
 
 ## 이미지
-
+\![Alt text]\(
 ![Alt text](IMG/pcimg.jpg)
 ![1234](IMG/pcimg.jpg)
-사이즈 조절 기능은 없기 때문에 <img width="" height=""></img>를 이용한다.
+사이즈 조절 기능은 없기 때문에 \<img width="" height=""></img\>를 이용한다.
+
+\<img src="IMG/pcimg.jpg" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="내pc"></img\>
+
+\<img src="IMG/pcimg.jpg" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="내pc"></img\>
+
 
 <img src="IMG/pcimg.jpg" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="내pc"></img><br/>
 <img src="IMG/pcimg.jpg" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="내pc"></img>
@@ -333,9 +361,11 @@ _202127067_
 
 __김한솔__
 
-\~~202127067 김한솔\~~
+~\~202127067 김한솔\~~
 
 ~~202127067 김한솔~~
+
+문장 중간에 사용할 경우에는 \**띄어쓰기\**를 사용하는 것이 좋다.
 
 문장 중간에 사용할 경우에는 **띄어쓰기** 를 사용하는 것이 좋다.
 
