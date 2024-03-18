@@ -106,7 +106,6 @@ git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
 예시: 마크다운 헤더H1
 =====================
 
-그리고 문서의 부제목용 문법 또한 존재합니다.
 
 예시: 마크다운 H2
 -----------------
@@ -189,6 +188,7 @@ git bash에서 알려준 명령어대로 입력하면 push가 끝났습니다.
     - 3
 
 이런식으로 같은 문자를 반복해서 나누어도되고
+
 *1
     
     +2
@@ -237,14 +237,15 @@ public class BootSpringBootApplication {
 
 * 코드블럭코드("```")을 이용하는 방법
 
-\(```\)
+
 public class BootSpringBootApplication {
   public static void main(String[] args) {
     System.out.println("Hello, Honeymon");
   }
 }
-\(```\)
+이 코드의 사이에 백틱(`)을 앞에 3개 가장 뒤에 3개 넣으면 된다.
 
+적용예
 
 ```
 public class BootSpringBootApplication {
@@ -257,13 +258,15 @@ public class BootSpringBootApplication {
 깃허브에선 코드블럭코드("```")시작점에 사용하는 언어를 선언하여 문법강조가 가능하다.
 
 
-|(```\)java
+백틱뒤에 java를 넣어본 적용예
+
+```java
 public class BootSpringBootApplication {
   public static void main(String[] args) {
     System.out.println("Hello, Honeymon");
   }
 }
-\(```\)
+```
 
 
 
