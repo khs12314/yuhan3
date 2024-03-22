@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<head>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class=" d_Top">
+        <span class="text" id="student_id">학번: 202127067</span>
+        <span class="text" id="student_name">이름: 김한솔</span>
+
+    </div>
+    <div class="d_Left">
+        <button type="button" onclick="location.href='circle.html'" class="bt" id="bt1">캔버스와 원</button>
+        <button type="button" onclick="location.href='game.html'" class="bt" id="bt2">좋아하는 게임</button>
+        <button type="button" onclick="location.href='index.html'" class="bt" id="bt3">디폴트</button>
+    </div>
+    <div class="d_Right">
+        <canvas id="circle" width="640" height="400"></canvas>
+    </div>
+</body>
+<script>
+    var canvas = document.getElementById('circle');
+    var ctx = canvas.getContext('2d');
+
+    ctx.beginPath();
+    ctx.arc(200, 200, 50, 0, Math.PI * 2);
+    ctx.stroke();
+</script>
+</html>
