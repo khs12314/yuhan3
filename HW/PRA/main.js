@@ -50,12 +50,13 @@ var _xb = 300;
 var _yb = 200;
 
 drawa();
-drawb();
+
 
 function drawa() {
+
     ctx.save()
     ctx.beginPath();
-    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.lineTo(0 + movex, 0 + movey);
     ctx.lineTo(xa, ya);
     ctx.lineTo(100 + movex, 100 + movey);
@@ -65,7 +66,8 @@ function drawa() {
     ctx.fill();
     
     ctx.closePath();
-    ctx.restore()
+    ctx.restore();
+    drawb();
     drawc();
     setInterval(drawa);
 } function drawb() {
