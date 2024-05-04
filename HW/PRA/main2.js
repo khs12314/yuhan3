@@ -92,8 +92,8 @@ var c = 50;
 var d = 50;
 var xpos = 200;
 var ypos = 200;
-var _xpos = 300;
-var _ypos = 300;
+var _xpos = 400;
+var _ypos = 400;
 
 function drawb() {
     ctx.save()
