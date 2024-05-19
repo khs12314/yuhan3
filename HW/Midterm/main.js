@@ -2,30 +2,40 @@ var canvas = document.getElementById("GameScreenCanvas");
 var ctx = canvas.getContext("2d");
 var my = 0;
 var mx = 0;
+var HP = 3;
+var xcount = 0;
+var ycount = 0;
+var centerX = canvas.width / 2;
+var centerY = canvas.height / 2;
 document.addEventListener('keydown', function (event) {
     if (event.key === 'ArrowDown') {
 
 
-        my = 10;
-        centerY += my;
+        my = -1;
+
+        console.log(centerY);
+        ycount += my;
 
     } if (event.key === 'ArrowUp') {
 
 
-        my = -10;
-        centerY += my;
+        my = +1;
+     
+        ycount += my;
 
 
     }
     if (event.key === 'ArrowLeft') {
 
-        mx = -10;
-        centerX += mx;
+        mx = +1;
+     
+        xcount += mx;
     }
     if (event.key === 'ArrowRight') {
 
-        mx = 10;
-        centerX += mx;
+        mx = -1;
+      
+        xcount += mx;
     }
     // 원하는 다른 키에 대한 처리 추가
 });
@@ -57,7 +67,7 @@ document.addEventListener('keyup', function (event) {
     // 원하는 다른 키에 대한 처리 추가
 });
 // 하트 그리기 함수
-/*function drawHeart() {
+function drawHeart() {
 
 
    
@@ -67,7 +77,7 @@ document.addEventListener('keyup', function (event) {
 
      x = canvas.width / 2;
      y = canvas.height / 2;
-    const scale = 3;
+    const scale = 1.5;
 
     ctx.moveTo(x, y);
 
@@ -92,18 +102,17 @@ document.addEventListener('keyup', function (event) {
     ctx.fillStyle = 'red';
     ctx.fill();
     ctx.closePath();
+   
     ctx.lineWidth = 1; // 테두리 선의 두께 설정
     ctx.strokeStyle = "black"; // 테두리 선의 색상 설정
     ctx.stroke();
    
-}*/
-var centerX = canvas.width / 2;
-var centerY = canvas.height / 2;
+}
 
-/*function drawRotatingHeart(rotationAngle) {
 
-    centerX = canvas.width / 2 + mx;
-    centerY = canvas.height / 2 + my;
+function drawRotatingHeart(rotationAngle) {
+
+ 
     const scale = 10;
 
    
@@ -111,16 +120,16 @@ var centerY = canvas.height / 2;
     ctx.save(); // 현재 캔버스 상태 저장
 
     // 회전 변환 적용 (캔버스 중심을 기준으로 회전)
-    ctx.translate(centerX, centerY); // 중심을 캔버스 중심으로 이동
+    ctx.translate(300, 400); // 중심을 캔버스 중심으로 이동
     ctx.rotate(rotationAngle * Math.PI / 180); // 각도를 라디안으로 변환하여 회전
-    ctx.translate(-centerX + mx, -centerY + my); // 다시 원래 위치로 이동
-   
+    ctx.translate(-300, -400); // 다시 원래 위치로 이동
+ 
 
     // 고정된 위치에 하트 그리기
-    drawHeart(centerX, centerY, scale);
+    drawHeart(centerX , centerY, scale);
 
     ctx.restore();// 이전 캔버스 상태로 복원
-}*/
+}
 
 // 초기 회전 각도 설정 (0도)
 let rotationAngle = 0;
@@ -179,59 +188,69 @@ function render() {
 
 }*/
 
-var speedx = 8;
-var speedy = 12;
+
 class circle {
-    constructor(color, radius, posx, posy, colider, colbool) {
+    constructor(color, radius, posx, posy, colbool,count) {
 
         this.color = colors[color];
         this.radius = radius;
-        this.positionX = posx;
-        this.positionY = posy;
+        this.positionX = posx + xcount;
+        this.positionY = posy + ycount;
         this.colA = (centerX - this.positionX) * (centerX - this.positionX);
         this.colB = (centerY - this.positionY) * (centerY - this.positionY);
-        this.items = [];
-
-
-
+       
+        this.speedx = 0;
+        this.speedy = 0;
+        
 
         this.colider = Math.sqrt(this.colA + this.colB);
         this.colbool = colbool;
+        this.count = count;
     }
 
     coliderfnc() {
 
-        this.colA = (centerX - this.positionX) * (centerX - this.positionX);
-        this.colB = (centerY - this.positionY) * (centerY - this.positionY);
-        console.log(this.colider);
-        console.log(this.colbool);
+        this.colA = (300 - this.positionX) * (300 - this.positionX);
+        this.colB = (400 - this.positionY) * (400 - this.positionY);
+        
         this.colider = Math.sqrt(this.colA + this.colB);
         if (this.colider <= 55) {
             this.colbool = true;
+            console.log(this.colider);
             return this.colbool;
         }
-        else {
-            this.colbool = false;
-            return this.colbool;
-        }
+       
         
     }
     move() {
 
         if (this.positionX > centerX) {
-            this.positionX -= speedx;
+            this.speedx = (centerX - this.positionX) / 500;
+           
         }
         if (this.positionX < centerX) {
-            this.positionX += speedx;
+            this.speedx = (centerX - this.positionX) / 500;
+        
         }
         if (this.positionY > centerY) {
-            this.positionY -= speedy;
+            this.speedy = (centerY - this.positionY) / 500;
+        
         }
         if (this.positionY < centerY) {
-            this.positionY += speedy;
+            this.speedy = (centerY - this.positionY) / 500;
+            
         }
      
 
+    }
+    moves() {
+        this.positionX += this.speedx + mx;
+        this.positionY += this.speedy + my;
+    }
+    rerending() {
+        if ((this.positionX < -10) || (this.positionX > 610) || (this.positionY > 910) || (this.positionY < -10)) {
+            return true;
+        }
     }
     draw() {
 
@@ -239,7 +258,7 @@ class circle {
         ctx.save();
         ctx.beginPath();
 
-        ctx.translate(this.positionX + mx, this.positionY + my);
+        ctx.translate(this.positionX, this.positionY);
         ctx.scale(this.radius, this.radius);
         for (var i = 0; i < 360; i++) {
             ctx.lineTo(Math.cos(Math.PI / 180 * i), Math.sin(Math.PI / 180 * i));
@@ -304,52 +323,91 @@ class Queue {
     forEach(callback) {
         this.items.forEach(callback);
     }
+    removeByCount(count) {
+        this.items = this.items.filter(circle => circle.count !== count);
+    }
+    enqueueByCount(count, element) {
+        this.items.splice(count, 0, element);
+    }
 }
-//0514현재 문제: 적들의 움직이는 속도가 달라 3번이 2번보다 먼저 플레이어에 부딪혀 dequeue를 호출 시 3번이 아닌 2번을 없애버림
-// 큐 사용 예시
+function death() {
+    if (HP == 0) {
+        window.location.href = 'death.html';
+    }
+}
+
 const queue = new Queue();
+const queue2 = new Queue();
+var count = 0;
 function render() {
-    var colbool = false;
-    var arran = Math.round(Math.random() * 3) + 1;
-    if (arran == 1) {
-        var c = Math.random() * 800;
-        var d = 0;
-    }
-    if (arran == 2) {
-        var c = 0;
-        var d = Math.random() * 900;
-    }
-    if (arran == 3) {
-        var c = Math.random() * 800;
-        var d = 900;
-    }
-    if (arran == 4) {
-        var c = 600;
-        var d = Math.random() * 900;
-    }
-    var colA = (centerX - c) * (centerX * -c);
-    var colB = (centerY - d) * (centerX * -d);
-    var col = Math.sqrt(colA + colB);
-    var a = Math.round(Math.random() * 6)
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    var intervalId = setInterval(function () {
+        if (count < 50) {
+            var colbool = false;
+            var arran = Math.round(Math.random() * 3) + 1;
+            if (arran == 1) {
+                var c = Math.random() * 800;
+                var d = 0;
+            }
+            if (arran == 2) {
+                var c = 0;
+                var d = Math.random() * 900;
+            }
+            if (arran == 3) {
+                var c = Math.random() * 800;
+                var d = 900;
+            }
+            if (arran == 4) {
+                var c = 600;
+                var d = Math.random() * 900;
+            }
+           
+            var a = Math.round(Math.random() * 6)
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    var Circle = new circle(a, 5, c, d, col, colbool);
-    Circle.draw();
-    queue.enqueue(Circle);
-    star();
-    star2();
-    queue.forEach(function (circle) {
-        circle.draw();
-        circle.move();
-        if (circle.coliderfnc()) {
-            queue.dequeue(Circle);
+            var Circle = new circle(a, 5, c, d, colbool, count);
+            count++;
+            Circle.move();
+            queue.enqueue(Circle);
+           
         }
+    }, 200);
+   
+    function animate() {
+       
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        rotationAngle += 1; // 회전 각도 증가 (1도씩)
+        centerY += my;
+        centerX += mx;
+        drawRotatingHeart(rotationAngle);
+        star();
+        star2();
+        queue.forEach(function (circle) {
+            if (circle.coliderfnc()) {
+                HP--;
+                death();
+                
+                handleCollision(circle);
+         
+            }
+            if (circle.rerending()) {
+                handleCollision(circle);
+            }
+            circle.moves();
+            circle.draw();
+        });
+        requestAnimationFrame(animate);
+    }
 
-    });
-
+    animate();
 }
-setInterval(render, 1000);
-
+function handleCollision(circle) {
+    var collidedCount = circle.count;
+    queue.removeByCount(collidedCount);
+    queue2.enqueueByCount(collidedCount, circle);
+   
+}
+render();
 
 var randomx = Math.random() * 200;
 var randomy = Math.random() * 300;

@@ -9,11 +9,11 @@ var color = "gray";
 function btn() {
     ctx.beginPath();
     ctx.fillStyle = color;
-    
+
     ctx.fillRect(x, y, 200, 100);
     ctx.font = 50 + 'px Arial';
     ctx.fillStyle = "black";
-    ctx.fillText("start", canvas.width / 2-50, canvas.height / 2 + 165);
+    ctx.fillText("start", canvas.width / 2 - 50, canvas.height / 2 + 165);
     ctx.lineWidth = 1; // 테두리 선의 두께 설정
     ctx.strokeStyle = "black"; // 테두리 선의 색상 설정
     ctx.stroke();
@@ -25,7 +25,7 @@ canvas.addEventListener('mousemove', function (event) {
 
     // 사각형 내에 있는지 확인
     if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height) {
-        color = "red";
+        color = "purple";
         console.log('x');
         console.log(color);
     } else {
@@ -43,7 +43,7 @@ canvas.addEventListener('click', function (event) {
         // main.html로 이동
         color = "blue";
         setTimeout(function () {
-            window.location.href = 'death.html';
+            window.location.href = 'main.html';
         }, 1000);
     }
 });
