@@ -7,6 +7,15 @@ var xcount = 0;
 var ycount = 0;
 var centerX = canvas.width / 2;
 var centerY = canvas.height / 2;
+var attck = false;
+document.addEventListener('keydown', function (event) {
+    // Check if the pressed key is the spacebar
+    if (event.code === 'Space') {
+        scale = 2.5;
+        attck = true;
+    }
+});
+
 document.addEventListener('keydown', function (event) {
     if (event.key === 'ArrowDown') {
 
@@ -66,6 +75,7 @@ document.addEventListener('keyup', function (event) {
     }
     // 원하는 다른 키에 대한 처리 추가
 });
+var scale = 1.5;
 // 하트 그리기 함수
 function drawHeart() {
 
@@ -77,7 +87,7 @@ function drawHeart() {
 
      x = canvas.width / 2;
      y = canvas.height / 2;
-    const scale = 1.5;
+    
 
     ctx.moveTo(x, y);
 
@@ -207,7 +217,13 @@ class circle {
         this.colbool = colbool;
         this.count = count;
     }
-
+    recircle() {
+        
+            if ((this.positionX < -10) || (this.positionX > 850) || (this.positionY > 950) || (this.positionY < -10)) {
+                return true;
+            
+        }
+    }
     coliderfnc() {
 
         this.colA = (300 - this.positionX) * (300 - this.positionX);
@@ -224,32 +240,46 @@ class circle {
     }
     move() {
 
-        if (this.positionX > centerX) {
-            this.speedx = (centerX - this.positionX) / 500;
+        if (this.positionX > 300) {
+            this.speedx = (300 - this.positionX + xcount) / 500;
            
         }
-        if (this.positionX < centerX) {
-            this.speedx = (centerX - this.positionX) / 500;
+        if (this.positionX < 300) {
+            this.speedx = (300 - this.positionX + xcount) / 500;
         
         }
-        if (this.positionY > centerY) {
-            this.speedy = (centerY - this.positionY) / 500;
+        if (this.positionY > 400) {
+            this.speedy = (400 - this.positionY + ycount) / 500;
         
         }
-        if (this.positionY < centerY) {
-            this.speedy = (centerY - this.positionY) / 500;
+        if (this.positionY < 400) {
+            this.speedy = (400 - this.positionY + ycount) / 500;
             
         }
      
 
     }
     moves() {
-        this.positionX += this.speedx + mx;
-        this.positionY += this.speedy + my;
+        this.positionX += this.speedx + (mx*2);
+        this.positionY += this.speedy + (my*2);
     }
     rerending() {
-        if ((this.positionX < -10) || (this.positionX > 610) || (this.positionY > 910) || (this.positionY < -10)) {
-            return true;
+        var arran = Math.round(Math.random() * 3) + 1;
+        if (arran == 1) {
+            this.positionX = Math.random() * 800;
+            this.positionY = 0;
+        }
+        if (arran == 2) {
+            this.positionX = 0;
+            this.positionY = Math.random() * 900;
+        }
+        if (arran == 3) {
+            this.positionX = Math.random() * 800;
+            this.positionY = 900;
+        }
+        if (arran == 4) {
+            this.positionX = 600;
+            this.positionY = Math.random() * 900;
         }
     }
     draw() {
@@ -335,13 +365,540 @@ function death() {
         window.location.href = 'death.html';
     }
 }
+var NumP = 10;
+var studentID = 202127067;
+function drawNum(num) {
+    
+    var NumP = 10, cntnum = 0;
+    var numStr = num.toString(); 
+    var length = numStr.length;
+    var startX = (length - 1) * 50;
+    for (var i = length - 1; i >= 0; i--) {
+        cntnum = parseInt(numStr[i]);
 
+        if (cntnum == 1) {
+            drawNum1(startX);
+        }
+        else if (cntnum == 2) {
+            drawNum2(startX);
+        }
+        else if (cntnum == 3) {
+            drawNum3(startX);
+        }
+        else if (cntnum == 4) {
+            drawNum4(startX);
+        }
+        else if (cntnum == 5) {
+            drawNum5(startX);
+        }
+        else if (cntnum == 6) {
+            drawNum6(startX);
+        }
+        else if (cntnum == 7) {
+            drawNum7(startX);
+        }
+        else if (cntnum == 8) {
+            drawNum8(startX);
+        }
+        else if (cntnum == 9) {
+            drawNum9(startX);
+        }
+        else if (cntnum == 0) {
+            drawNum0(startX);
+        }
+
+
+        startX -= 50;//-50을 통해 각 숫자당 50의 범위를 할당
+
+    }
+}
+function drawNum1(x) {
+    //오른쪽 위 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 0);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+    //오른쪽 아래 작대기
+
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 25);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+}
+function drawNum2(x) {
+
+    //가장 위쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(50 + x, 0);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 0);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //중간작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 25);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    // 왼쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 25);
+    ctx.lineTo(25 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //맨 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 50);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+}
+
+function drawNum3(x) {
+
+    //가장 위쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(50 + x, 0);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 0);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //중간작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 25);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 25);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //맨 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 50);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+}
+
+function drawNum4(x) {
+
+    //왼쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 0);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(25 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //중간작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 25);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 25);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+}
+
+function drawNum5(x) {
+
+    //가장 위쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(50 + x, 0);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(25 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //중간작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 25);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 25);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //맨 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 50);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+}
+
+function drawNum6(x) {
+
+    //가장 위쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(50 + x, 0);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //왼쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(25 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //중간작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 25);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 25);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    // 왼쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 25);
+    ctx.lineTo(25 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //맨 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 50);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+}
+
+function drawNum7(x) {
+
+    //가장 위쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(50 + x, 0);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 0);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 25);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //왼쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(25 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+}
+
+function drawNum8(x) {
+    //왼쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 0);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(25 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //가장 위쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(50 + x, 0);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //중간작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 25);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 25);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+    // 왼쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 25);
+    ctx.lineTo(25 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //맨 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 50);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+}
+function drawNum9(x) {
+    //왼쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 0);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(25 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //가장 위쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(50 + x, 0);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //중간작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 25);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 25);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //맨 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 50);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+}
+function drawNum0(x) {
+    //왼쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(25 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //오른쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 0);
+    ctx.lineTo(50 + x, 25);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //가장 위쪽 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 0);
+    ctx.lineTo(50 + x, 0);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+
+    //오른쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(50 + x, 25);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+    // 왼쪽 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 25);
+    ctx.lineTo(25 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
+    //맨 아래 작대기
+    ctx.beginPath();
+    ctx.moveTo(25 + x, 50);
+    ctx.lineTo(50 + x, 50);
+    ctx.strokeStyle = "magenta";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+}
+
+
+
+
+var starcount = 0;
+drawNum(1)//화면 우측 상단에 숫자 쓰기
 const queue = new Queue();
 const queue2 = new Queue();
 var count = 0;
+var rerend = true;
 function render() {
-    
+    starpos();
+  
     var intervalId = setInterval(function () {
+        
         if (count < 50) {
             var colbool = false;
             var arran = Math.round(Math.random() * 3) + 1;
@@ -369,16 +926,28 @@ function render() {
             count++;
             Circle.move();
             queue.enqueue(Circle);
+            
+            
            
+        }
+        if (rerend) {
+            queue2.forEach(function (circle) {
+                circle.rerending();
+                circle.move();
+                queue.enqueue(queue2.dequeue());
+            });
         }
     }, 200);
    
     function animate() {
        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawNum(studentID);
         rotationAngle += 1; // 회전 각도 증가 (1도씩)
         centerY += my;
         centerX += mx;
+        starx += mx;
+        stary += my;
         drawRotatingHeart(rotationAngle);
         star();
         star2();
@@ -388,9 +957,9 @@ function render() {
                 death();
                 
                 handleCollision(circle);
-         
+                
             }
-            if (circle.rerending()) {
+            if (circle.recircle()) {
                 handleCollision(circle);
             }
             circle.moves();
@@ -405,7 +974,15 @@ function handleCollision(circle) {
     var collidedCount = circle.count;
     queue.removeByCount(collidedCount);
     queue2.enqueueByCount(collidedCount, circle);
+    console.log(queue2.size());
    
+}
+function handleCollision2(circle) {
+    var collidedCount = circle.count;
+    queue2.removeByCount(collidedCount);
+    queue.enqueueByCount(collidedCount, circle);
+
+
 }
 render();
 
@@ -440,13 +1017,34 @@ function star2() {
 
 
 }
+var starx;
+var stary;
+function starpos() {
+    var arran = Math.round(Math.random() * 3) + 1;
+    if (arran == 1) {
+        starx = Math.random() * 800;
+        stary = 0;
+    }
+    if (arran == 2) {
+        starx = 0;
+        stary = Math.random() * 900;
+    }
+    if (arran == 3) {
+        starx = Math.random() * 800;
+        stary = 900;
+    }
+    if (arran == 4) {
+        starx = 600;
+        stary = Math.random() * 900;
+    }
+}
 function star() {
 
-
+  
 
     ctx.save();
     ctx.beginPath();
-    ctx.translate(centerX, centerY);
+    ctx.translate(starx, stary);
 
 
 
