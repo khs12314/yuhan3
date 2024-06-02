@@ -5,6 +5,7 @@ var mx = 0;
 var HP = 3;
 var xcount = 0;
 var ycount = 0;
+var starcount = 0;
 var centerX = canvas.width / 2;
 var centerY = canvas.height / 2;
 var attck = false;
@@ -198,7 +199,9 @@ function render() {
 
 }*/
 
-
+var starcolx;
+var starcoly;
+var starcol;
 class circle {
     constructor(color, radius, posx, posy, colbool,count) {
 
@@ -238,6 +241,7 @@ class circle {
        
         
     }
+   
     move() {
 
         if (this.positionX > 300) {
@@ -412,6 +416,226 @@ function drawNum(num) {
 
     }
 }
+
+function starcoliderfunc() {
+    starcolx = (starx - 300) * (starx - 300);
+    starcoly = (stary - 400) * (stary - 400);
+    starcol = Math.sqrt(starcolx + starcoly);
+    if (starcol < 110) {
+        starpos();
+        starcount +=1;
+    }
+}
+
+
+
+const queue = new Queue();
+const queue2 = new Queue();
+var count = 0;
+var rerend = true;
+function render() {
+    starpos();
+  
+    var intervalId = setInterval(function () {
+        
+        if (count < 50) {
+            var colbool = false;
+            var arran = Math.round(Math.random() * 3) + 1;
+            if (arran == 1) {
+                var c = Math.random() * 800;
+                var d = 0;
+            }
+            if (arran == 2) {
+                var c = 0;
+                var d = Math.random() * 900;
+            }
+            if (arran == 3) {
+                var c = Math.random() * 800;
+                var d = 900;
+            }
+            if (arran == 4) {
+                var c = 600;
+                var d = Math.random() * 900;
+            }
+           
+            var a = Math.round(Math.random() * 6)
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            var Circle = new circle(a, 5, c, d, colbool, count);
+            count++;
+            Circle.move();
+            queue.enqueue(Circle);
+            
+            
+           
+        }
+        if (rerend) {
+            queue2.forEach(function (circle) {
+                circle.rerending();
+                circle.move();
+                queue.enqueue(queue2.dequeue());
+            });
+        }
+    }, 200);
+   
+    function animate() {
+       
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawNum(starcount);
+        rotationAngle += 1; // 회전 각도 증가 (1도씩)
+        centerY += my;
+        centerX += mx;
+        starx += mx;
+        stary += my;
+        drawRotatingHeart(rotationAngle);
+        star();
+        star2();
+        starcoliderfunc();
+        queue.forEach(function (circle) {
+            if (circle.coliderfnc()) {
+                HP--;
+                death();
+                
+                handleCollision(circle);
+                
+            }
+            if (circle.recircle()) {
+                handleCollision(circle);
+            }
+            circle.moves();
+            circle.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
+function handleCollision(circle) {
+    var collidedCount = circle.count;
+    queue.removeByCount(collidedCount);
+    queue2.enqueueByCount(collidedCount, circle);
+    console.log(queue2.size());
+   
+}
+function handleCollision2(circle) {
+    var collidedCount = circle.count;
+    queue2.removeByCount(collidedCount);
+    queue.enqueueByCount(collidedCount, circle);
+
+
+}
+render();
+
+var randomx = Math.random() * 200;
+var randomy = Math.random() * 300;
+function star2() {
+
+
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.translate(centerX, centerY);
+
+    ctx.scale(50, 50);
+    for (var i = 0; i < 360; i++) {
+
+        ctx.lineTo(Math.cos(Math.PI / 180 * i), Math.sin(Math.PI / 180 * i));
+
+    }
+
+
+
+
+
+
+    ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+    ctx.fill();
+
+    ctx.closePath();
+
+    ctx.restore();
+
+
+}
+var starx;
+var stary;
+function starpos() {
+    var arran = Math.round(Math.random() * 3) + 1;
+    if (arran == 1) {
+        starx = Math.random() * 800;
+        stary = 0;
+    }
+    if (arran == 2) {
+        starx = 0;
+        stary = Math.random() * 900;
+    }
+    if (arran == 3) {
+        starx = Math.random() * 800;
+        stary = 900;
+    }
+    if (arran == 4) {
+        starx = 600;
+        stary = Math.random() * 900;
+    }
+}
+function star() {
+
+  
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.translate(starx, stary);
+
+
+
+
+    for (var i = 0; i < 360; i++) {
+        if (i % 60 == 0) {
+            ctx.scale(50, 50);
+            ctx.lineTo(Math.cos(Math.PI / 180 * (i - 30)), Math.sin(Math.PI / 180 * (i - 30)));
+
+            ctx.scale(1 / 50, 1 / 50);
+            ctx.scale(25, 25);
+            ctx.lineTo(Math.cos(Math.PI / 180 * i), Math.sin(Math.PI / 180 * i));
+            ctx.scale(1 / 25, 1 / 25);
+
+        }
+    }
+
+
+
+
+
+    ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+    ctx.fill();
+
+    ctx.closePath();
+
+    ctx.restore();
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function drawNum1(x) {
     //오른쪽 위 작대기
     ctx.beginPath();
@@ -885,193 +1109,3 @@ function drawNum0(x) {
     ctx.closePath();
 }
 
-
-
-
-var starcount = 0;
-drawNum(1)//화면 우측 상단에 숫자 쓰기
-const queue = new Queue();
-const queue2 = new Queue();
-var count = 0;
-var rerend = true;
-function render() {
-    starpos();
-  
-    var intervalId = setInterval(function () {
-        
-        if (count < 50) {
-            var colbool = false;
-            var arran = Math.round(Math.random() * 3) + 1;
-            if (arran == 1) {
-                var c = Math.random() * 800;
-                var d = 0;
-            }
-            if (arran == 2) {
-                var c = 0;
-                var d = Math.random() * 900;
-            }
-            if (arran == 3) {
-                var c = Math.random() * 800;
-                var d = 900;
-            }
-            if (arran == 4) {
-                var c = 600;
-                var d = Math.random() * 900;
-            }
-           
-            var a = Math.round(Math.random() * 6)
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            var Circle = new circle(a, 5, c, d, colbool, count);
-            count++;
-            Circle.move();
-            queue.enqueue(Circle);
-            
-            
-           
-        }
-        if (rerend) {
-            queue2.forEach(function (circle) {
-                circle.rerending();
-                circle.move();
-                queue.enqueue(queue2.dequeue());
-            });
-        }
-    }, 200);
-   
-    function animate() {
-       
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawNum(studentID);
-        rotationAngle += 1; // 회전 각도 증가 (1도씩)
-        centerY += my;
-        centerX += mx;
-        starx += mx;
-        stary += my;
-        drawRotatingHeart(rotationAngle);
-        star();
-        star2();
-        queue.forEach(function (circle) {
-            if (circle.coliderfnc()) {
-                HP--;
-                death();
-                
-                handleCollision(circle);
-                
-            }
-            if (circle.recircle()) {
-                handleCollision(circle);
-            }
-            circle.moves();
-            circle.draw();
-        });
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-}
-function handleCollision(circle) {
-    var collidedCount = circle.count;
-    queue.removeByCount(collidedCount);
-    queue2.enqueueByCount(collidedCount, circle);
-    console.log(queue2.size());
-   
-}
-function handleCollision2(circle) {
-    var collidedCount = circle.count;
-    queue2.removeByCount(collidedCount);
-    queue.enqueueByCount(collidedCount, circle);
-
-
-}
-render();
-
-var randomx = Math.random() * 200;
-var randomy = Math.random() * 300;
-function star2() {
-
-
-
-    ctx.save();
-    ctx.beginPath();
-    ctx.translate(centerX, centerY);
-
-    ctx.scale(50, 50);
-    for (var i = 0; i < 360; i++) {
-
-        ctx.lineTo(Math.cos(Math.PI / 180 * i), Math.sin(Math.PI / 180 * i));
-
-    }
-
-
-
-
-
-
-    ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
-    ctx.fill();
-
-    ctx.closePath();
-
-    ctx.restore();
-
-
-}
-var starx;
-var stary;
-function starpos() {
-    var arran = Math.round(Math.random() * 3) + 1;
-    if (arran == 1) {
-        starx = Math.random() * 800;
-        stary = 0;
-    }
-    if (arran == 2) {
-        starx = 0;
-        stary = Math.random() * 900;
-    }
-    if (arran == 3) {
-        starx = Math.random() * 800;
-        stary = 900;
-    }
-    if (arran == 4) {
-        starx = 600;
-        stary = Math.random() * 900;
-    }
-}
-function star() {
-
-  
-
-    ctx.save();
-    ctx.beginPath();
-    ctx.translate(starx, stary);
-
-
-
-
-    for (var i = 0; i < 360; i++) {
-        if (i % 60 == 0) {
-            ctx.scale(50, 50);
-            ctx.lineTo(Math.cos(Math.PI / 180 * (i - 30)), Math.sin(Math.PI / 180 * (i - 30)));
-
-            ctx.scale(1 / 50, 1 / 50);
-            ctx.scale(25, 25);
-            ctx.lineTo(Math.cos(Math.PI / 180 * i), Math.sin(Math.PI / 180 * i));
-            ctx.scale(1 / 25, 1 / 25);
-
-        }
-    }
-
-
-
-
-
-    ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
-    ctx.fill();
-
-    ctx.closePath();
-
-    ctx.restore();
-
-
-}
