@@ -79,47 +79,26 @@ document.addEventListener('keyup', function (event) {
 var scale = 1.5;
 // 하트 그리기 함수
 function drawHeart() {
-
-
-   
-
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
     ctx.beginPath();
-   
 
-     x = canvas.width / 2;
-     y = canvas.height / 2;
-    
+    // Move the canvas origin to the center
+    ctx.translate(canvas.width / 2, canvas.height / 2);
 
-    ctx.moveTo(x, y);
+    for (let t = 0; t <= 2 * Math.PI; t += 0.01) {
+        const x = 16 * Math.pow(Math.sin(t), 3);
+        const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+        if (t === 0) {
+            ctx.moveTo(x * 4, -y * 4); // Scale and flip the y-coordinate
+        } else {
+            ctx.lineTo(x * 4, -y * 4); // Scale and flip the y-coordinate
+        }
+    }
 
-    // 왼쪽 반원
-    ctx.bezierCurveTo(x, y - scale, x - 5 * scale, y - 5 * scale, x - 15 * scale, y - 5 * scale);
-
-    // 왼쪽 아래 부분
-    ctx.bezierCurveTo(x - 25 * scale, y - 5 * scale, x - 25 * scale, y + 5 * scale, x - 25 * scale, y + 5 * scale);
-
-    // 오른쪽 아래 부분
-    ctx.bezierCurveTo(x - 25 * scale, y + 15 * scale, x, y + 35 * scale, x, y + 35 * scale);
-
-    // 오른쪽 반원
-    ctx.bezierCurveTo(x, y + 35 * scale, x + 25 * scale, y + 15 * scale, x + 25 * scale, y + 5 * scale);
-
-    // 오른쪽 상단 부분
-    ctx.bezierCurveTo(x + 25 * scale, y + 5 * scale, x + 25 * scale, y - 5 * scale, x + 15 * scale, y - 5 * scale);
-
-    // 오른쪽 반원
-    ctx.bezierCurveTo(x + 5 * scale, y - 5 * scale, x, y - scale, x, y);
-
+    ctx.closePath();
     ctx.fillStyle = 'red';
     ctx.fill();
-    ctx.closePath();
-   
-    ctx.lineWidth = 1; // 테두리 선의 두께 설정
-    ctx.strokeStyle = "black"; // 테두리 선의 색상 설정
-    ctx.stroke();
-   
 }
-
 
 function drawRotatingHeart(rotationAngle) {
 
