@@ -4,6 +4,7 @@
 #include <chrono>
 #include <thread>
 #include <cmath>
+#include <vector>
 using namespace std;
 int cnt;
 float jump;
@@ -44,7 +45,23 @@ float M(float a) {
     float b = a / 0.1f;
     return b;
 }
+bool aabbcolliderA(float _ax, float _ay, float bx, float by) {
+    bool x = false;
+    if ((_ax < bx) && (_ay < by)) {
+        std::cout << "s";
+        x = true;
 
+    }
+    return x;
+
+}
+bool aabbclliderB(float ax, float ay, float _ax, float _ay) {
+    bool x = false;
+    if ((_ax > ax) && (_ay > ay)) {
+        x = true;
+    }
+    return x;
+}
 // 7-segment segment positions using the provided conversion functions
 struct Segment {
     GLfloat x1, y1, x2, y2, x3, y3, x4, y4;
@@ -150,6 +167,51 @@ int player() {
 
     return 0;
 }
+struct Obstacle {
+    float x, y;         // 위치
+    float width, height;// 크기
+    float speed;        // 이동 속도
+
+    Obstacle(float x, float y, float width, float height, float speed)
+        : x(x), y(y), width(width), height(height), speed(speed) {}
+};
+
+std::vector<Obstacle> obstacles; // 장애물 리스트
+
+void initializeObstacles() {
+    const int maxObstacles = 10;
+    for (int i = 0; i < maxObstacles; ++i) {
+        float startX = 1.0f + i * 3.0f;
+        obstacles.emplace_back(startX, 0.0f, XM(3), YM(3), 0.1f); // 장애물 추가
+    }
+}
+
+void updateObstacles(float deltaTime) {
+    for (auto& obstacle : obstacles) {
+        //if((aabbcolliderA())&&(aabbclliderB()))
+        obstacle.x -= obstacle.speed * deltaTime; // 왼쪽으로 이동
+
+        // 화면 왼쪽을 벗어나면 오른쪽 끝에서 재사용
+        if (obstacle.x + obstacle.width < -1.0f) {
+            obstacle.x = obstacles.back().x + 3.0f;
+            std::rotate(obstacles.begin(), obstacles.begin() + 1, obstacles.end()); // 장애물 위치 회전
+        }
+    }
+}
+
+void drawObstacles() {
+    glColor3f(0.0f, 1.0f, 0.0f);
+
+    for (const auto& obstacle : obstacles) {
+        glBegin(GL_QUADS);
+     
+        glVertex2f(obstacle.x, obstacle.y);
+        glVertex2f(obstacle.x + obstacle.width, obstacle.y);
+        glVertex2f(obstacle.x + obstacle.width, obstacle.y + obstacle.height);
+        glVertex2f(obstacle.x, obstacle.y + obstacle.height);
+        glEnd();
+    }
+}
 chrono::steady_clock::time_point prev_end = chrono::steady_clock::now();
 int delay_time_ms = 0;
 int a = 0;
@@ -175,13 +237,14 @@ int main()
         glfwTerminate();
         return -1;
     }
-
+    initializeObstacles(); // 장애
     // OpenGL 컨텍스트를 윈도우에 연결
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, keyCallback);
     // 렌더링 루프
     while (!glfwWindowShouldClose(window)) {
         // 현재 시간 가져오기
+        float deltaTime = 0.1f; // 시간 간격 설정 (임시)
         this_thread::sleep_for(chrono::milliseconds(1000 / 60 - a));
         delay_time_ms = 17 - chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - prev_end).count();
         //출력
@@ -212,14 +275,18 @@ int main()
 
 
         }
+
         // 이벤트 처리
         glfwPollEvents();
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        
 
         // 렌더링 버퍼 교체
         displayNumber(5);
+        updateObstacles(deltaTime); // 장애물 업데이트
+        drawObstacles(); // 장애물 그리기
         player();
         glfwSwapBuffers(window);
         prev_end = chrono::steady_clock::now();
